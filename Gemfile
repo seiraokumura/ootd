@@ -50,10 +50,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'factory_bot_rails', '~> 4.0'
   gem 'rspec-rails'
-  gem 'rubocop', require: false
-  gem 'rubocop-rails'
-  gem 'rubocop-rails_config'
-  gem 'rubocop-rspec'
+  gem 'rubocop-airbnb'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
