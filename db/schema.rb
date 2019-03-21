@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_055317) do
+ActiveRecord::Schema.define(version: 2019_03_21_152639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "micropost_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["micropost_id"], name: "index_favorites_on_micropost_id"
+    t.index ["user_id", "micropost_id"], name: "index_favorites_on_user_id_and_micropost_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.string "name"
@@ -21,6 +31,16 @@ ActiveRecord::Schema.define(version: 2019_03_05_055317) do
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "unfavorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "micropost_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["micropost_id"], name: "index_unfavorites_on_micropost_id"
+    t.index ["user_id", "micropost_id"], name: "index_unfavorites_on_user_id_and_micropost_id", unique: true
+    t.index ["user_id"], name: "index_unfavorites_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,4 +57,8 @@ ActiveRecord::Schema.define(version: 2019_03_05_055317) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "favorites", "microposts"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "unfavorites", "microposts"
+  add_foreign_key "unfavorites", "users"
 end

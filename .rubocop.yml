@@ -14,3 +14,20 @@ AllCops:
 # 日本語でのコメントを許可
 AsciiComments:
   Enabled: false
+
+# 一文の長さを１５０文字にする
+Metrics/LineLength:
+  Max: 150
+
+# "Missing top-level class documentation comment."を無効
+Style/Documentation:
+  Enabled: false
+
+# "ClassAndModuleChildren EnforcedStyle"をネスト形式にする
+ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+# RSpecだけ"Metrics/BlockLength"を除外する
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

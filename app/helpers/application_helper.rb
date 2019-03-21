@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   # ページごとの完全なタイトルを返します。
   def full_title(page_title)
-    base_title = "#ootd"
+    base_title = '#ootd'
     if page_title.blank?
       base_title
     else

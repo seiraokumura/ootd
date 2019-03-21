@@ -1,0 +1,29 @@
+<h2>投稿一覧</h2>
+<% microposts.each do |micropost| %>
+<li id="micropost-<%= micropost.id %>">
+  <span class="user">
+    <%= link_to micropost.user.name, micropost.user %>
+  </span>
+  <span class="content">
+    <%= micropost.content %>
+    <%= image_tag micropost.image.url %>
+  </span>
+  <span class="timestamp">
+    <%= time_ago_in_words(micropost.created_at) %>前
+    <% if !Favorite.exists?(user_id: current_user.id, micropost_id: micropost.id) %>
+    <%= link_to "GOOD", micropost_add_path(micropost), method: :micropost %>
+    <% else %>
+    <%= link_to "GOOD解除", micropost_add_path(micropost), method: :delete %>
+    <% end %>
+    <% if !Unfavorite.exists?(user_id: current_user.id, micropost_id: micropost.id) %>
+    <%= link_to "BAD", micropost_add_path(micropost), method: :micropost %>
+    <% else %>
+    <%= link_to "BAD解除", micropost_add_path(micropost), method: :delete %>
+    <% end %>
+    <% if current_user?(micropost.user) %>
+    <%= link_to "delete", micropost, method: :delete,
+                                              data: { confirm: "削除してよろしいですか？" } %>
+    <% end %>
+  </span>
+</li>
+<% end %>

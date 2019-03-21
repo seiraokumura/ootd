@@ -1,8 +1,7 @@
-class StaticPagesController < ApplicationController
-  def index
-    
-  end
+# frozen_string_literal: true
 
-  def about
+class StaticPagesController < ApplicationController
+  def home
+    @microposts = Micropost.all if user_signed_in?
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'helpers/session_helpers'
 
 Rspec.configure do |config|
